@@ -3,13 +3,13 @@ include 'EmpWageParentClass.php';
 include 'EmpWageInterface.php';
 class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
 {
-
-    public $IS_FULL_TIME = 1;
-    public $IS_PART_TIME = 2;
+    const IS_FULL_TIME = 1;
+    const IS_PART_TIME = 2;
     public $EMP_HRS;
     public $numOfCompany = 0;
 
     public $empWage;
+    public $dailyEmpWage;
 
     /**
      * initialize array
@@ -17,6 +17,7 @@ class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
     public function __construct()
     {
         $this->empWage = [];
+        $this->dailyEmpWage = [];
     }
 
     /**
@@ -53,7 +54,13 @@ class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
                     $EMP_HRS = 0;
             }
             $TOTAL_EMP_HRS = $TOTAL_EMP_HRS + $EMP_HRS;
+            $dailyEmpWage[$TOTAL_WORKING_DAYS] = parent::$WAGE_PER_HR * $EMP_HRS;
             $TOTAL_WORKING_DAYS++;
+        }
+
+        echo parent::$company . " Daily Employee Wage :\n";
+        foreach ($dailyEmpWage as $key => $dailyWage) {
+            echo "Wage for Day " . $key . " : " . $dailyWage . "\n";
         }
 
         $TOTAL_SALARY = parent::$WAGE_PER_HR * $TOTAL_EMP_HRS;
