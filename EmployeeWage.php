@@ -54,17 +54,13 @@ class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
                     $EMP_HRS = 0;
             }
             $TOTAL_EMP_HRS = $TOTAL_EMP_HRS + $EMP_HRS;
-            $dailyEmpWage[$TOTAL_WORKING_DAYS] = parent::$WAGE_PER_HR * $EMP_HRS;
+            $this->dailyEmpWage[$companyWage->company][$TOTAL_WORKING_DAYS] = parent::$WAGE_PER_HR * $EMP_HRS;
+
             $TOTAL_WORKING_DAYS++;
         }
 
-        echo parent::$company . " Daily Employee Wage :\n";
-        foreach ($dailyEmpWage as $key => $dailyWage) {
-            echo "Wage for Day " . $key . " : " . $dailyWage . "\n";
-        }
-
         $TOTAL_SALARY = parent::$WAGE_PER_HR * $TOTAL_EMP_HRS;
-        return "Total Employee wage for company " . parent::$company . " is : " . $TOTAL_SALARY . "\n";
+        return "Total Employee wage for company " . $companyWage->company . " is : " . $TOTAL_SALARY . "\n";
     }
 
     /**
@@ -74,6 +70,35 @@ class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
     {
         foreach ($this->empWage as $company => $companyDetails) {
             echo $companyDetails;
+        }
+    }
+
+    /**
+     * companyWage method is used to print company wage
+     * @param companyName 
+     */
+    public function companyWage($companyName)
+    {
+        foreach ($this->empWage as $company => $companyDetails) {
+            if ($company == $companyName) {
+                echo $companyDetails;
+            }
+        }
+    }
+
+    /**
+     * dailyWageEmp method is used to print daily wage of emp in company
+     * @param companyName
+     */
+    public function dailyWageEmp($companyName)
+    {
+        foreach ($this->dailyEmpWage as $key => $dailyWage) {
+            if ($key == $companyName) {
+                for ($i = 0; $i < count($dailyWage); $i++) {
+                    // echo $dailyWage[$i] . " ";
+                    echo "Wage for Day " . $i . " : " . $dailyWage[$i] . "\n";
+                }
+            }
         }
     }
 }
