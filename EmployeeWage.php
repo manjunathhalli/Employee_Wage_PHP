@@ -27,7 +27,7 @@ class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
     {
         $companyWage = new EmpWageParentClass($company, $WAGE_PER_HR, $MAX_WORKING_DAYS, $MAX_HRS_IN_MONTH);
 
-        $this->empWage[$this->numOfCompany] = $this->wagesForWorkingHourAndDays($companyWage);
+        $this->empWage[$company] = $this->wagesForWorkingHourAndDays($companyWage);
         $this->numOfCompany++;
     }
 
@@ -65,8 +65,8 @@ class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
      */
     public function showCompanyEmpWage()
     {
-        for ($i = 0; $i < count($this->empWage); $i++) {
-            echo $this->empWage[$i];
+        foreach ($this->empWage as $company => $companyDetails) {
+            echo $companyDetails;
         }
     }
 }
