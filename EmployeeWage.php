@@ -1,7 +1,9 @@
 <?php
 include 'EmpWageParentClass.php';
-class EmployeeWage extends EmpWageParentClass
+include 'EmpWageInterface.php';
+class EmployeeWage extends EmpWageParentClass implements EmpWageInterface
 {
+
     public $IS_FULL_TIME = 1;
     public $IS_PART_TIME = 2;
     public $EMP_HRS;
