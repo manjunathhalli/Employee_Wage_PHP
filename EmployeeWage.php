@@ -1,46 +1,40 @@
 <?php
 class EmployeeWage
 {
-    public $IS_FULL_TIMER = 1;
-    public $IS_PART_TIMER = 2;
-    public $WORKING_DAYS_PER_MONTH = 20;
-    public $WORKING_HOUR_PER_MONTH = 100;
-    public $wagePerHour = 20;
-    public $totalEmpWorkingHour = 0;
-    public $EmpWorkingHour = 0;
-    public $totalEmpWorkingDays = 0;
-    public $fullTimeEmpWorkingHour = 8;
-    public $partTimeEmpWorkingHour = 8;
+    public $IS_FULL_TIME = 1;
+    public $IS_PART_TIME = 2;
+    public $IS_ABSENT = 0;
+    public $WAGE_PER_HR = 20;
+    public $MAX_WORKING_DAYS = 22;
+    public $MAX_HRS_IN_MONTH = 100;
+    public $EMP_HRS;
+
     function calculateEmployeeWage()
     {
-        for ($i = 0; $i < $this->WORKING_DAYS_PER_MONTH; $i++) {
-            while ($this->totalEmpWorkingHour <= $this->WORKING_HOUR_PER_MONTH || $this->totalEmpWorkingDays < $this->WORKING_DAYS_PER_MONTH) {
-                $this->totalEmpWorkingDays++;
-                $empCheck = rand(0, 1);
-                echo "\nEmployee Attendance : $empCheck";
-                switch ($empCheck) {
-                    case $this->IS_FULL_TIMER:
-                        echo "\n Employee is Present";
-                        $empHour = 8;
-                        break;
-                    case $this->IS_PART_TIMER:
-                        echo "\n Employee is Present";
-                        $empHour = 4;
-                        break;
-                    default:
-                        echo "\n Employee is Absent";
-                        $empHour = 0;
-                        echo "\n Employee Monthly Wage is : 0";
-                        break;
-                }
-                $this->totalEmpWorkingHour += $empHour;
-                echo "\nEmployee Working Day : " . $this->totalEmpWorkingDays;
-                echo "\nEmployee Hours :" . $empHour;
-                $totalEmpwage = $this->totalEmpWorkingHour * $this->wagePerHour;
-                echo "\nTotal Employee Wage :" . $totalEmpwage;
+
+        $TOTAL_WORKING_DAYS = 0;
+        $TOTAL_EMP_HRS = 0;
+        while ($TOTAL_WORKING_DAYS < $this->MAX_WORKING_DAYS && $TOTAL_EMP_HRS < $this->MAX_HRS_IN_MONTH) {
+            $num = rand(0, 2);
+            switch ($num) {
+                case 1:
+                    $EMP_HRS = 8;
+                    break;
+                case 2:
+                    $EMP_HRS = 4;
+                    break;
+                default:
+                    $EMP_HRS = 0;
             }
+
+            $TOTAL_EMP_HRS = $TOTAL_EMP_HRS + $EMP_HRS;
+            $TOTAL_WORKING_DAYS++;
         }
+
+        $TOTAL_SALARY = $this->WAGE_PER_HR * $TOTAL_EMP_HRS;
+        echo "Total Salary :" . $TOTAL_SALARY;
     }
 }
-$empWage = new EmployeeWage();
-$empWage->calculateEmployeeWage();
+
+$wage = new EmployeeWage();
+$wage->calculateEmployeeWage();
