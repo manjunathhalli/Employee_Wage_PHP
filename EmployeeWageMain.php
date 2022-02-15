@@ -1,8 +1,9 @@
 <?php
 include 'EmployeeWage.php';
-echo "Welcome to Employee Wage Problem"."\n";
+echo "Welcome to Employee Wage Problem" . "\n";
 
-$wage = new EmpWageChild("D-Mart",20,22,100);
-$wage->wagesForWorkingHourAndDays();
-$wage = new EmpWageChild("Star Home",15,26,120);
-$wage->wagesForWorkingHourAndDays("D-Mart",20,22,100);
+$wage = new EmployeeWage();
+$wage->addEmpWage("Big-Bazaar", 35, 43, 267);
+$wage->addEmpWage("Home mart", 20, 45, 175);
+
+$wage->showCompanyEmpWage();
